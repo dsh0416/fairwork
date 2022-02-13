@@ -8,13 +8,11 @@ on:
     - cron: '0 7 * * SUN'
 jobs:
   test:
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         include:
         - { os: ubuntu-20.04, ruby: '3.1' }
-        - { os: ubuntu-20.04, ruby: 'head', experimental: true }
         - { os: macos-12.2, ruby: '3.1' }
         - { os: windows-2019, ruby: '3.1' }
     name: test ${{ matrix.os }} ${{ matrix.ruby }} ${{ matrix.backend }}
