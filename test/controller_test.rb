@@ -4,7 +4,7 @@ require "test_helper"
 require 'action_controller/railtie'
 require 'logger'
 
-Rails.logger = Logger.new(STDOUT)
+# Rails.logger = Logger.new(STDOUT)
 
 class App < ::Rails::Application
   config.eager_load = false
