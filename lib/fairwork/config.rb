@@ -3,8 +3,8 @@
 class Fairwork::Configure
   extend Fairwork::Configurable
 
-  set :storage, 'redis://localhost:6379/0'
+  set :redis, nil
   set :track_id, proc { |this| this.request.remote_ip }
-  set :session_id, proc { SecureRandom.hex(16) }
-  set :difficulty_update, proc { |this| 1 }
+  set :difficulty, proc { |this| 1 }
+  set :timestamp_expire, 10
 end

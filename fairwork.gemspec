@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     spec.require_paths = ["lib"]
 
     spec.add_runtime_dependency 'activesupport', '~> 7.0'
-    spec.add_runtime_dependency 'ohm', '~> 3.0'
+    spec.add_runtime_dependency 'redis', '~> 4.6'
 
     spec.add_development_dependency 'simplecov', '~> 0.20.0'
     spec.add_development_dependency 'minitest-reporters', '~> 1.4'

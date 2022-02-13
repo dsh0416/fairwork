@@ -3,8 +3,7 @@ class Fairwork::PoW
   attr_reader :session_id
   attr_reader :iv
 
-  def initialize(session_id, iv)
-    @session_id = session_id
+  def initialize(iv)
     @iv = iv
   end
 
@@ -15,7 +14,7 @@ class Fairwork::PoW
 
   def solve(method, path, difficulty)
     timestamp = Time.now.to_i
-    uniq_ctr = SecureRandom.random_bytes(16).unpack('C*')
+    uniq_ctr = SecureRandom.random_number(2**128)
     while true
       nounce = rand(2**64) # Nounce does not have to be crypto secured
       hash = execute(timestamp, method, path, uniq_ctr, nounce)
@@ -27,7 +26,6 @@ class Fairwork::PoW
 
   def execute(timestamp, method, path, uniq_ctr, nounce)
     # bytes are in big endian
-    # Session ID (128bit) +
     # iv (128bit) +
     # Unix Timestamp (64bit) +
     # SHA256(Method + Path, 256bit) +
@@ -35,12 +33,11 @@ class Fairwork::PoW
     # Nounce (64bit)
     bytes = []
 
-    bytes += @session_id.to_bytes(:big_endian, 8)
-    bytes += @iv.to_bytes(:big_endian, 8)
-    bytes += timestamp.to_bytes(:big_endian, 4)
-    bytes += Digest::SHA256.hexdigest(method + path).to_i(16).to_bytes(:big_endian, 16)
-    bytes += uniq_ctr
-    bytes += nounce.to_bytes(:big_endian, 4)
+    bytes += @iv.to_bytes(:big_endian, 16)
+    bytes += timestamp.to_bytes(:big_endian, 8)
+    bytes += Digest::SHA256.hexdigest(method + path).to_i(16).to_bytes(:big_endian, 32)
+    bytes += uniq_ctr.to_bytes(:big_endian, 16)
+    bytes += nounce.to_bytes(:big_endian, 8)
 
     Digest::SHA256.hexdigest(bytes.pack('C*')).to_i(16).to_s(2).rjust(256, '0')
   end
