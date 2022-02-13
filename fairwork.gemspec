@@ -19,9 +19,11 @@ Gem::Specification.new do |spec|
     spec.files         = Dir["{lib}/**/*", "LICENSE", "README.md"]
     spec.require_paths = ["lib"]
 
-    spec.add_runtime_dependency 'activesupport', '~> 7.0'
     spec.add_runtime_dependency 'redis', '~> 4.6'
 
+    spec.add_development_dependency 'rails', '~> 7.0'
+    spec.add_development_dependency 'rack-test', '~> 1.1'
     spec.add_development_dependency 'simplecov', '~> 0.20.0'
     spec.add_development_dependency 'minitest-reporters', '~> 1.4'
+    spec.add_development_dependency 'mock_redis', '~> 0.29'
   end

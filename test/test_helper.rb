@@ -10,5 +10,7 @@ end
 require "minitest/autorun"
 require "minitest/benchmark"
 require "minitest/reporters"
+require "mock_redis"
+require "rack/test"
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new()]
 require "fairwork"
