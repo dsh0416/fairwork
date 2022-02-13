@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
     spec.add_runtime_dependency 'redis', '~> 4.6'
 
     spec.add_development_dependency 'rails', '~> 7.0'
+    spec.add_development_dependency 'tzinfo-data' # This is a MUST on windows
     spec.add_development_dependency 'rack-test', '~> 1.1'
     spec.add_development_dependency 'simplecov', '~> 0.20.0'
     spec.add_development_dependency 'minitest-reporters', '~> 1.4'
